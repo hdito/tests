@@ -1,20 +1,25 @@
-import Head from "next/head";
-import { Inter } from "@next/font/google";
-import { useState } from "react";
-import { Question } from "@/types/question";
-import { NextPage } from "next";
-import { TestContextProvider } from "@/contexts/TestContext";
 import { TestForm } from "@/components/TestForm";
+import { TestContextProvider } from "@/contexts/TestContext";
+import { Question } from "@/types/question";
+import { Inter } from "@next/font/google";
+import { NextPage } from "next";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export type TestProps = {
+  title: string;
   description: string;
   questions: Question[];
   results: { from: number; text: string }[];
 };
 
-const Test: NextPage<TestProps> = ({ description, questions, results }) => {
+const Test: NextPage<TestProps> = ({
+  title,
+  description,
+  questions,
+  results,
+}) => {
   return (
     <>
       <Head>
@@ -22,14 +27,19 @@ const Test: NextPage<TestProps> = ({ description, questions, results }) => {
         <meta name="description" content="Тестовый тест" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <main className={`${inter.variable} min-h-screen font-sans`}>
-        <TestContextProvider
-          description={description}
-          questions={questions}
-          results={results}
-        >
-          <TestForm />
-        </TestContextProvider>
+      <main className={`${inter.variable} min-h-screen p-2 py-8 font-sans`}>
+        <div className="m-auto max-w-md">
+          <h1 className="mb-2 text-2xl font-bold">{title}</h1>
+          <div className="rounded-xl border p-4 shadow-lg">
+            <TestContextProvider
+              description={description}
+              questions={questions}
+              results={results}
+            >
+              <TestForm />
+            </TestContextProvider>
+          </div>
+        </div>
       </main>
     </>
   );
@@ -37,7 +47,8 @@ const Test: NextPage<TestProps> = ({ description, questions, results }) => {
 
 Test.getInitialProps = () => {
   return {
-    description: "Тестовый тест",
+    title: "Тестовый тест",
+    description: "Описание тестового теста",
     questions: [
       {
         text: "У вас ноет живот?",

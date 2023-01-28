@@ -2,12 +2,13 @@ import { TestProps } from "@/pages";
 import { UserAnswer } from "@/types/userAnswer";
 import { createContext, PropsWithChildren, useContext, useState } from "react";
 
-type TestContext = TestProps & {
+type TestContext = Omit<TestProps, "title"> & {
   progress: number | null;
   answers: UserAnswer[];
   onSelectAnswer: (answerIndex: number, value: number) => void;
   onNextQuestion: () => void;
   onPreviousQuestion: () => void;
+  onReset: () => void;
 };
 
 const TestContext = createContext<TestContext | null>(null);
@@ -19,7 +20,7 @@ export function TestContextProvider({
   description,
   questions,
   results,
-}: PropsWithChildren<TestProps>) {
+}: PropsWithChildren<Omit<TestProps, "title">>) {
   const [progress, setProgress] = useState<number | null>(null);
   const [answers, setAnswers] = useState<UserAnswer[]>(
     Array(questions.length).fill(null)
@@ -39,6 +40,10 @@ export function TestContextProvider({
     setProgress((prev) => (prev === 0 ? null : (prev as number) - 1));
   }
 
+  function onReset() {
+    setProgress(null);
+    setAnswers(Array(questions.length).fill(null));
+  }
   return (
     <TestContext.Provider
       value={{
@@ -50,6 +55,7 @@ export function TestContextProvider({
         onSelectAnswer,
         onNextQuestion,
         onPreviousQuestion,
+        onReset,
       }}
     >
       {children}

@@ -7,10 +7,15 @@ export function TestForm(): JSX.Element {
 
   if (progress === null)
     return (
-      <div>
-        <p>{description}</p>
-        <button onClick={() => onNextQuestion()}>Начать тест</button>
-      </div>
+      <>
+        <p className="mb-4">{description}</p>
+        <button
+          className="rounded-lg bg-blue-200 px-4 py-2 text-sky-800"
+          onClick={() => onNextQuestion()}
+        >
+          Начать тест
+        </button>
+      </>
     );
 
   if (progress === questions.length) return <TestResult />;

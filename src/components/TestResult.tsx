@@ -1,7 +1,7 @@
 import { useTestContext } from "@/contexts/TestContext";
 
 export function TestResult(): JSX.Element {
-  const { results, answers } = useTestContext();
+  const { results, answers, onReset } = useTestContext();
 
   const userAnswer = answers as number[];
   const totalScore = userAnswer.reduce((prev, current) => prev + current, 0);
@@ -21,8 +21,14 @@ export function TestResult(): JSX.Element {
   }
 
   return (
-    <div>
-      <p>{userResult}</p>
-    </div>
+    <>
+      <p className="mb-4">{userResult}</p>
+      <button
+        onClick={() => onReset()}
+        className="rounded-lg bg-blue-200 px-4 py-2 text-sky-800"
+      >
+        Вернуться к описанию
+      </button>
+    </>
   );
 }
