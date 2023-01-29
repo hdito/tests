@@ -18,10 +18,10 @@ export function TestFormQuestion(): JSX.Element {
           ({Math.floor((((progress as number) + 1) / questions.length) * 100)}%)
         </span>
       </div>
-      <p className="">{questions[progress as number].text}</p>
-      <ul className="mb-4 flex flex-col gap-1">
+      <p className="mb-2 text-lg">{questions[progress as number].text}</p>
+      <ul className="mb-4 flex flex-col gap-2">
         {questions[progress as number].answers.map((answer) => (
-          <label className="flex items-center gap-1" key={answer.text}>
+          <label className="flex items-baseline gap-2" key={answer.text}>
             <input
               type="radio"
               name={(progress as number).toString()}

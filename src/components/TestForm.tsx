@@ -8,9 +8,9 @@ export function TestForm(): JSX.Element {
   if (progress === null)
     return (
       <>
-        <p className="mb-4">{description}</p>
+        <p className="mb-4 whitespace-pre-line">{description}</p>
         <button
-          className="rounded-lg bg-blue-200 px-4 py-2 text-sky-800"
+          className="w-full rounded-lg bg-blue-200 px-4 py-2 text-sky-800"
           onClick={() => onNextQuestion()}
         >
           Начать тест

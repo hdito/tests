@@ -30,7 +30,7 @@ const Test: NextPage<TestProps> = ({
       </Head>
       <main className={`${inter.variable} min-h-screen p-2 py-8 font-sans`}>
         <div className="m-auto max-w-md">
-          <h1 className="mb-2 text-2xl font-bold">{title}</h1>
+          <h1 className="mb-4 text-2xl font-bold">{title}</h1>
           <div className="rounded-xl border p-4 shadow-lg">
             <TestContextProvider
               description={description}
@@ -57,17 +57,17 @@ export const getStaticProps: GetStaticProps<TestProps> = () => {
       questions: beckQuestions,
       results: [
         { from: 0, text: "У вас нет симптомов депрессии." },
-      {
+        {
           from: 10,
           text: "У вас есть симптомы лёгкой депрессии (субдепрессии).",
-      },
+        },
         { from: 16, text: "У вас есть симптомы умеренной депрессии." },
-      {
+        {
           from: 20,
           text: "У вас есть симптомы выраженной депрессии (средней тяжести).",
         },
         { from: 30, text: "У вас есть симптомы тяжёлой депрессии." },
-        ],
-      },
+      ],
+    },
   };
 };
