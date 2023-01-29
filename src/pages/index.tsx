@@ -1,8 +1,9 @@
 import { TestForm } from "@/components/TestForm";
 import { TestContextProvider } from "@/contexts/TestContext";
+import { beckQuestions } from "@/data/beckQuestions";
 import { Question } from "@/types/question";
 import { Inter } from "@next/font/google";
-import { NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -45,31 +46,28 @@ const Test: NextPage<TestProps> = ({
   );
 };
 
-Test.getInitialProps = () => {
+export default Test;
+
+export const getStaticProps: GetStaticProps<TestProps> = () => {
   return {
-    title: "Тестовый тест",
-    description: "Описание тестового теста",
-    questions: [
+    props: {
+      title: "Шкала депрессии Бека",
+      description:
+        "В этом опроснике содержатся группы утверждений.\n\nВнимательно прочитайте каждую группу утверждений. Затем выберите в каждой группе одно утверждение, которое лучше всего описываете, как вы себя чувствовали на этой неделе и сегодня.",
+      questions: beckQuestions,
+      results: [
+        { from: 0, text: "У вас нет симптомов депрессии." },
       {
-        text: "У вас ноет живот?",
-        answers: [
-          { text: "да", value: 1 },
-          { text: "нет", value: 0 },
+          from: 10,
+          text: "У вас есть симптомы лёгкой депрессии (субдепрессии).",
+      },
+        { from: 16, text: "У вас есть симптомы умеренной депрессии." },
+      {
+          from: 20,
+          text: "У вас есть симптомы выраженной депрессии (средней тяжести).",
+        },
+        { from: 30, text: "У вас есть симптомы тяжёлой депрессии." },
         ],
       },
-      {
-        text: "Вы давно ели?",
-        answers: [
-          { text: "да", value: 1 },
-          { text: "нет", value: 0 },
-        ],
-      },
-    ],
-    results: [
-      { from: 0, text: "Кажется, вы не голодны." },
-      { from: 2, text: "Кажется, вы голодны." },
-    ],
   };
 };
-
-export default Test;
