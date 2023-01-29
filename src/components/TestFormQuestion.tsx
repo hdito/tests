@@ -43,8 +43,9 @@ export function TestFormQuestion(): JSX.Element {
           </button>
         ) : null}
         <button
-          className="col-start-2 rounded-lg bg-blue-200 px-4 py-2 text-sky-800"
+          className="col-start-2 rounded-lg bg-blue-200 px-4 py-2 text-sky-800 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-800"
           onClick={() => onNextQuestion()}
+          disabled={answers[progress as number] === null}
         >
           Дальше
         </button>
