@@ -1,7 +1,8 @@
 import { TestForm } from "@/components/TestForm";
-import { TestContextProvider } from "@/contexts/TestContext";
+import { TestStoreContextProvider } from "@/contexts/TestStoreContext";
 import { beckQuestions } from "@/data/beckQuestions";
 import { Question } from "@/types/question";
+import { Result } from "@/types/result";
 import { Inter } from "@next/font/google";
 import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
@@ -12,7 +13,7 @@ export type TestProps = {
   title: string;
   description: string;
   questions: Question[];
-  results: { from: number; text: string }[];
+  results: Result[];
 };
 
 const Test: NextPage<TestProps> = ({
@@ -32,13 +33,13 @@ const Test: NextPage<TestProps> = ({
         <div className="m-auto max-w-md">
           <h1 className="mb-4 text-2xl font-bold">{title}</h1>
           <div className="rounded-xl border p-4 shadow-lg">
-            <TestContextProvider
+            <TestStoreContextProvider
               description={description}
               questions={questions}
               results={results}
             >
               <TestForm />
-            </TestContextProvider>
+            </TestStoreContextProvider>
           </div>
         </div>
       </main>
